@@ -160,7 +160,7 @@ def parse_article(article):
     except Exception:
         year = ""
 
-    # jorunal
+    # journal
     try:
         journal = str(art["Journal"]["Title"])
     except Exception:
