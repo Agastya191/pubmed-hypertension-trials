@@ -4,14 +4,14 @@ import re
 import pandas as pd
 from Bio import Entrez
 
-# ── Configuration ─────────────────────────────────────────────────────────────
+# configuration
 
 Entrez.email = "agmunnangi@agastya191.github.io" 
 SEARCH_TERM  = "hypertension[Title/Abstract] AND Clinical Trial[pt]"
 MAX_RESULTS  = 100
 OUTPUT_DIR   = "results"
 
-# ── Country classification ────────────────────────────────────────────────────
+# countries 
 
 GLOBAL_NORTH = {
     "usa", "united states", "u.s.", "u.s.a", "us",
@@ -183,14 +183,12 @@ def parse_article(article: dict) -> dict:
             if aff_str and aff_str not in affiliations:
                 affiliations.append(aff_str)
 
-    # Extract countries from affiliations
     countries = []
     for aff in affiliations:
         country = extract_country_from_affiliation(aff)
         if country and country not in countries:
             countries.append(country)
 
-    # Primary country = first affiliation's country
     primary_country = countries[0] if countries else "Unknown"
     primary_region  = classify_region(primary_country)
 
