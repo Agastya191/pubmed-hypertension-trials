@@ -140,7 +140,7 @@ def fetch_article_details(pmids: list) -> list:
     return records
 
 
-def parse_article(article: dict) -> dict:
+def parse_article(article):
     """
     Parse a single PubMed article record into a flat dict.
     Extracts: PMID, title, year, journal, authors, affiliations, countries.
