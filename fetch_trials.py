@@ -30,7 +30,6 @@ MAX_RESULTS  = 100
 OUTPUT_DIR   = "results"
 
 # ── Country classification ────────────────────────────────────────────────────
-# Based on UN Development Programme Human Development Index groupings
 
 GLOBAL_NORTH = {
     "usa", "united states", "u.s.", "u.s.a", "us",
@@ -84,23 +83,16 @@ def extract_country_from_affiliation(affiliation: str) -> str:
     if not affiliation:
         return ""
 
-    # Remove email addresses
     affiliation = re.sub(r"\S+@\S+", "", affiliation)
 
-    # Split by common delimiters and take the last non-empty segment
     parts = [p.strip().rstrip(".") for p in re.split(r"[;,]", affiliation)]
     parts = [p for p in parts if len(p) > 2]
 
     if not parts:
         return ""
 
-    # Last segment is usually the country
     candidate = parts[-1].strip()
-
-    # Handle zip codes at the end — strip them
     candidate = re.sub(r"\s+\d{4,}$", "", candidate).strip()
-
-    # Handle "USA" embedded in city-state-zip strings
     us_match = re.search(
         r"\b(USA|U\.S\.A\.|United States|U\.S\.)\b", affiliation, re.IGNORECASE
     )
@@ -161,7 +153,7 @@ def fetch_article_details(pmids: list) -> list:
         for article in batch_records["PubmedArticle"]:
             records.append(parse_article(article))
 
-        time.sleep(0.34)   # respect NCBI rate limit
+        time.sleep(0.34)
 
     return records
 
