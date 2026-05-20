@@ -44,11 +44,9 @@
 
 ## Interpretation
 
-Hypertension disproportionately affects populations in the Global South — it is the leading cause of cardiovascular mortality in sub-Saharan Africa, South Asia, and Latin America. However, this analysis shows that **46.0% of clinical trials** are conducted in Global North institutions.
+Hypertension disproportionately affects populations in the Global South: it is the leading cause of cardiovascular mortality in sub-Saharan Africa, South Asia, and Latin America. However, this analysis shows that 46.0% of clinical trials are conducted in Global North institutions.
 
 This creates a systematic bias in treatment evidence: clinical guidelines derived from these trials may not reflect how hypertension presents, progresses, or responds to treatment in lower-income populations. Factors such as dietary patterns, genetic variation, access to antihypertensive medications, and comorbidity profiles differ substantially across regions.
-
-The result is a literature that is technically rigorous but geographically narrow — producing recommendations that are applied globally but validated locally.
 
 ---
 
