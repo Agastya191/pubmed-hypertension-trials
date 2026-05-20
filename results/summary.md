@@ -2,7 +2,6 @@
 ## PubMed Analysis — 100 Most Recent Clinical Trials
 
 **Search Query:** `hypertension[Title/Abstract] AND Clinical Trial[pt]`  
-**Publication Range:** 2026–2026  
 **Total Trials Analyzed:** 100
 
 ---
