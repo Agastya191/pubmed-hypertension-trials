@@ -1,21 +1,3 @@
-"""
-fetch_trials.py
----------------
-Fetches metadata for the 100 most recent PubMed Clinical Trials
-related to hypertension, extracts author affiliations and countries,
-and outputs a DataFrame with a Global North vs Global South breakdown.
-
-Usage:
-    python fetch_trials.py
-
-Requirements:
-    pip install biopython pandas
-
-Output:
-    - results/trials.csv         Raw trial metadata with parsed countries
-    - results/summary.md         Markdown summary of representation gap
-"""
-
 import os
 import time
 import re
@@ -24,7 +6,7 @@ from Bio import Entrez
 
 # ── Configuration ─────────────────────────────────────────────────────────────
 
-Entrez.email = "agmunnangi@agastya191.github.io"  # required by NCBI
+Entrez.email = "agmunnangi@agastya191.github.io" 
 SEARCH_TERM  = "hypertension[Title/Abstract] AND Clinical Trial[pt]"
 MAX_RESULTS  = 100
 OUTPUT_DIR   = "results"
@@ -178,7 +160,7 @@ def parse_article(article: dict) -> dict:
     except Exception:
         year = ""
 
-    # Journal
+    # jorunal
     try:
         journal = str(art["Journal"]["Title"])
     except Exception:
@@ -218,7 +200,7 @@ def parse_article(article: dict) -> dict:
         "year":            year,
         "journal":         journal,
         "n_authors":       len(authors),
-        "authors":         "; ".join(authors[:5]),  # first 5 authors
+        "authors":         "; ".join(authors[:5]), 
         "affiliations":    " | ".join(affiliations[:3]),
         "primary_country": primary_country,
         "primary_region":  primary_region,
@@ -300,25 +282,25 @@ The result is a literature that is technically rigorous but geographically narro
 def main():
     os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-    # 1. Fetch IDs
+    # fetch IDs
     pmids = fetch_pubmed_ids(SEARCH_TERM, MAX_RESULTS)
 
-    # 2. Fetch full records
+    # get full records
     print("\nFetching article details...")
     records = fetch_article_details(pmids)
 
-    # 3. Build DataFrame
+    # create DataFrame
     df = pd.DataFrame(records)
     df.to_csv(os.path.join(OUTPUT_DIR, "trials.csv"), index=False)
     print(f"\nSaved {len(df)} records to {OUTPUT_DIR}/trials.csv")
 
-    # 4. Print quick stats
+    # get stats
     print("\nRegion breakdown:")
     print(df["primary_region"].value_counts())
     print("\nTop 10 countries:")
     print(df["primary_country"].value_counts().head(10))
 
-    # 5. Build and save markdown summary
+    # create markdown summary
     summary = build_summary(df)
     summary_path = os.path.join(OUTPUT_DIR, "summary.md")
     with open(summary_path, "w") as f:
